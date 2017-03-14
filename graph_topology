@@ -1,0 +1,122 @@
+#include <iostream>
+#include <vector>
+#include <map>
+#include <algorithm>
+
+
+using namespace std;
+
+// Check if the element in map->first is in map->second somewhere, otherwise there'll be a loop
+bool IsLoop(map<int, vector<int>>& AL) {
+	int i = 0;
+	for (auto it = AL.begin(); it != AL.end(); it++, i++) {
+		if (it->second[i] > 0) {
+			return true;
+		}
+	}
+	return false;
+}
+
+// Characteristics of a ring graph
+// - No loop
+// - The degree on each vertex is 2
+bool IsRing(map<int, vector<int>>& AL) {
+	for (auto it = AL.begin(); it != AL.end(); it++) {
+		if (it->second.size() != 2) {
+			return false;
+		}
+	}
+	return true;
+}
+
+bool IsStar(vector<vector<int>>& rows) {
+
+	return false;
+}
+
+bool IsComplete(vector<vector<int>>& rows) {
+	return false;
+}
+
+int main() {
+	// Store the dimension of the matrix
+	int node;
+
+	// Filler variable used to get input from user for elements in the matrix
+	int weight;
+
+	// Store rows of the matrix
+	vector<vector<int>> rows;
+
+	// Store cols of the matrix
+	vector<int> cols;
+
+	// Store vertices and edges incident on them
+	map<int, vector<int>> adjacencyList;
+
+	cout << "Enter number of nodes: ";
+	cin >> node;
+
+	cout << "Enter matrix: " << endl;
+
+	// Store matrix from user input
+	for (int i = 0; i < node; i++) {
+		for (int j = 0; j < node; j++) {
+			cin >> weight;
+			cols.push_back(weight);
+		}
+		rows.push_back(cols);
+		cols.clear();
+	}
+
+	// Print out what's in vector<vector<int>>
+	cout << "Elements in vector" << endl;
+	for (auto row : rows) {
+		for (auto col : row) {
+			cout << col << " ";
+		}
+		cout << endl;
+	}
+
+	// Check for loops
+	bool hasLoop = false;
+	for (int i = 0; i < rows.size(); i++) {
+		if (rows[i][i] > 0) {
+			hasLoop = true;
+		}
+	}
+
+	vector<int> dummy;
+	// Remove edges that has weight = 100 or 0 from vector and store the rest in map with keys = elements in rows and values = elements in columns
+	// Index starts at 1
+	for (int i = 0, j = 1; i < rows.size(); i++, j++) {
+		for (auto elm : rows[i]) {
+			if (elm > 0 && elm < 100) {
+				dummy.push_back(elm);
+			}
+		}
+		adjacencyList.insert(make_pair(j, dummy));
+		dummy.clear();
+	}
+
+
+	// Print out what's in map
+	cout << "Elements in map" << endl;
+	for (auto it = adjacencyList.begin(); it != adjacencyList.end(); it++) {
+		cout << it->first << " -> ";
+		for (int i : it->second) {
+			cout << i << ", ";
+		}
+		cout << endl;
+	}
+
+	bool IsLoopResult, IsRingResult;
+	IsLoopResult = IsLoop(adjacencyList);
+	IsRingResult = IsRing(adjacencyList);
+
+	cout << "Result of IsLoop: " << hasLoop << endl;
+	cout << "Result of IsRing: " << IsRingResult << endl;
+	// Get edge incident on verticies
+	// If 0 < weight < 100, store weight
+	return 0;
+}
