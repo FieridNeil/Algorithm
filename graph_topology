@@ -17,13 +17,25 @@ bool IsRing(map<int, vector<int>>& AL) {
 	return true;
 }
 
-bool IsStar(vector<vector<int>>& rows) {
+// Chacteristics of a star graph
+// - No loop
+// - Only 1 vertex has degree = total # of vertices - 1
+// - Other vertices has degree = 1
+bool IsStar(map<int, vector<int>>& AL) {
 
 	return false;
 }
 
-bool IsComplete(vector<vector<int>>& rows) {
-	return false;
+// Chacteristics of a complete graph
+// - No loop
+// - The degree of each vertex = total # of verices - 1
+bool IsComplete(map<int, vector<int>>& AL, int size) {
+	for (auto it = AL.begin(); it != AL.end(); it++) {
+		if (it->second.size() != size - 1) {
+			return false;
+		}
+	}
+	return true;
 }
 
 int main() {
