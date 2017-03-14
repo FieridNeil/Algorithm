@@ -21,8 +21,19 @@ bool IsRing(map<int, vector<int>>& AL) {
 // - No loop
 // - Only 1 vertex has degree = total # of vertices - 1
 // - Other vertices has degree = 1
-bool IsStar(map<int, vector<int>>& AL) {
-
+bool IsStar(map<int, vector<int>>& AL, int size) {
+	int IsMorethanOneDegree = 0;
+	int IsDegreeOne = 0;
+	for (auto it = AL.begin(); it != AL.end(); it++) {
+		if (it->second.size() == 1) {
+			IsDegreeOne++;
+		}else if (it->second.size() == size - 1) {
+			IsMorethanOneDegree++;
+		}
+	}
+	if (IsMorethanOneDegree == 1 && IsDegreeOne == size - 1) {
+		return true;
+	}
 	return false;
 }
 
@@ -110,12 +121,15 @@ int main() {
 		cout << endl;
 	}
 
-	bool IsRingResult;
+	bool IsRingResult, IsCompleteResult, IsStarResult;
 	IsRingResult = IsRing(adjacencyList);
+	IsStarResult = IsStar(adjacencyList, node);
+	IsCompleteResult = IsComplete(adjacencyList, node);
 
 	cout << "Result of IsLoop: " << hasLoop << endl;
 	cout << "Result of IsRing: " << IsRingResult << endl;
-	// Get edge incident on verticies
-	// If 0 < weight < 100, store weight
+	cout << "Result of IsStar: " << IsStarResult << endl;
+	cout << "Result of IsComplete: " << IsCompleteResult << endl;
+
 	return 0;
 }
