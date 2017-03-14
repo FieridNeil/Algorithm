@@ -1,21 +1,9 @@
 #include <iostream>
 #include <vector>
 #include <map>
-#include <algorithm>
 
 
 using namespace std;
-
-// Check if the element in map->first is in map->second somewhere, otherwise there'll be a loop
-bool IsLoop(map<int, vector<int>>& AL) {
-	int i = 0;
-	for (auto it = AL.begin(); it != AL.end(); it++, i++) {
-		if (it->second[i] > 0) {
-			return true;
-		}
-	}
-	return false;
-}
 
 // Characteristics of a ring graph
 // - No loop
@@ -110,8 +98,7 @@ int main() {
 		cout << endl;
 	}
 
-	bool IsLoopResult, IsRingResult;
-	IsLoopResult = IsLoop(adjacencyList);
+	bool IsRingResult;
 	IsRingResult = IsRing(adjacencyList);
 
 	cout << "Result of IsLoop: " << hasLoop << endl;
