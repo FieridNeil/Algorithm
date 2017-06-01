@@ -1,3 +1,5 @@
+// @author: Fierid Neil
+// @email: fieridneil@gmail.com
 // Assignment 1: Alternating disks problem, left-to-right algorithm   
 // XX YY ( YOU NEED TO COMPLETE YOUR NAME )  
 // Given 2n alternating disks (dark, light) the program reads the number of single color disks 
