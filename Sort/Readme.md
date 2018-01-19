@@ -1,6 +1,6 @@
 List of sorting algorithm implemented:
 
-- Selection Sort
+- Selection Sort (O<sub>2</sub>) 
 
 
-Analysis: http://bigocheatsheet.com/
+Analysis cheat sheet: http://bigocheatsheet.com/
